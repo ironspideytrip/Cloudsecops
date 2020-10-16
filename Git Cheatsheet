@@ -1,0 +1,31 @@
+Git is a must toolkit for anyone who wants to contribute to open source projects. Here in this blog , I have attempted to document my workings and learning for git by solving the guided challenges posted by katacoda. Note that this will mostly contain just commands so we can very well use this like a cheatsheet of sorts. 
+Scenario 1 , Commiting Files:
+-Command to create a repository : git init
+-Status of files changed in working directory: git status
+-To add file to staging area :git add <file|directory>
+-To commit the staged files: git commit -m "<commit message>"
+-Add certain rules which will ignore this files to commnit : git add .gitignore (.gitignore should contain rules)
+Scenario 2, Commiting Changes:
+-To compare changes in the working directory against a previously committed version.: git diff 
+-To compare the changes in the staging area against the previous commit you provide the staged parameter : git diff --staged
+-View the history of the repository and the commit log: git log
+-View the changes made in the commit : git show
+Scenario 3 - Working Remotely:
+-To connect to a remote repository: git remote add "localname" "repo location"
+-By default all git repositories have a master branch where the code is worked on. To push to master branch . : git push "localname" master
+-To sync changes from a remote repository into your local version :git pull "localname" master
+Scenario 4 , Undoing Changes:
+-Replace everything in the working directory to the last committed version: git checkout
+-Move files back from the staging area to the working directory: git reset
+-Combine both git reset and git checkout in a single command: git reset --hard
+-To revert multiple commits : git revert
+Scenario 5,Fixing Merge Conflicts"
+-git pull is a combination of fetch and merge.
+-To resolve conflicts we can use checkout and use "theirs" and "ours" for remote and local versions.
+-Unwind the changes you've made and replay the changes in the branch, applying your changes as if they happened all on the same branch: git rebase
+Scenario 6 , Experiments Using Branches :
+-Take an existing branch and creates a separate branch to work in: git branch <new branch name> <starting branch>
+-To switch to a branch :git checkout <new branch name>
+-To list all the branches: git branch
+-Merge the commits in your new branch back into master: git checkout master ; git merge new_branch
+-Delete a branch: git branch -d <branch_name>
