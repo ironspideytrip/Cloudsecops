@@ -1,0 +1,17 @@
+Limit memory usage of container:-docker run -d --name mb100 --memory 100m alpine top
+
+Cpu sharing in containers: docker run -d --name c768 --cpuset-cpus 0 --cpu-shares 768 benhall/stress
+
+Network namespace to access host. Process will have access to host machine network interface:docker run -d --name c768 --cpuset-cpus 0 --cpu-shares 768 benhall/stress
+
+PID namespace to access host:docker run -it --pid=host alpine ps aux
+
+To set up clair:docker run -d -p 5432:5432 --name db arminc/clair-db:latest
+docker run -d -p 6060:6060 --link db:postgres --name clair arminc/clair-local-scan:latest
+
+To run clair:
+./clair-scanner --ip 172.17.0.1 -r clair_report.json "container name"
+
+No new privilege flag:docker run -u 1000 --security-opt=no-new-privileges "image name"
+
+To run with apparmor profile:docker run --security-opt apparmor="app armour profile" -d --name apparmor-nginx nginx
