@@ -1,0 +1,58 @@
+Search for existing images:- docker search "image"
+
+To run a container in background :- docker run -d "image"
+
+Running containers display:- docker ps
+
+To run container with a different name and binding it to a host port so that accessible by host:- docker run -d --name "your name" -p <host-port>:<container-port> "image"
+
+Note without using host-port option, it'll be bound to a random port in host . Use docker port "image name" "port-number" to find out where it's bound.
+To save data in docker host:- docker run -d --name "image name" -v "Directory of host":"Directory of container" "image"
+
+
+To get shell in container:- docker run -it "image" bash 
+
+
+To build image from dockerfile existing :- docker build -t "Image-name":"version tag" (directory containing data needed to build)
+
+To build data container:-docker create -v /config --name "image name" "image"
+
+To copy files into container:docker cp "file" "image name":"directory in container"
+
+To make data container portable: docker export "container name" > "tar file"
+To import data container into docker:- docker import "tar file"
+
+
+To create docker network : docker network create "network name"
+
+When launching new containers, to assign network to container:docker run -d --name="image name" --net="network-name" "image"
+
+To attach existing containers:- docker network connect frontend-network "container name"
+
+To list all networks in our host:docker network ls
+
+To inspect a particulat network:docker network inspect "network name"
+
+To disconnect name:docker network disconnect "network name: "container"
+
+To access log files of container:docker logs "container name"
+
+To automatically run a container with options to restart upon failure for three times :docker run -d --name "container name" --restart=on-failure:3 "image"
+
+To automatically run a container with options to restart always upon failure for three times :docker run -d --name "container name" --restart=always "image"
+
+To find stats of a container: docker stats "container"
+
+To find stats of all conatiners:- docker ps -q | xargs docker stats
+
+
+To start docker swarm: docker swarm init
+
+To join a swarm run these in a worker host:
+token=$(ssh -o StrictHostKeyChecking=no 172.17.0.110 "docker swarm join-token -q worker") && echo $token
+
+docker swarm join 172.17.0.110:2377 --token $token
+
+Create overlay network in swarm: docker network create -d overlay "network name"
+
+To deploy two replicas of container across swarm:docker service create --name http --network skynet --replicas 2 -p 80:80 katacoda/docker-http-server
