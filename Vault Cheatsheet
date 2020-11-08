@@ -1,0 +1,30 @@
+-To start  a vault dev server:-
+vault server -dev
+export VAULT_ADDR = '[addr]'
+export VAULT_TOKEN = '[root token]'
+
+-Verify server is running :- vault status
+
+
+Put a secret :-  vault kv put <path> <key>=<value>   
+
+To get a secret:- vault kv get <path>
+Print value of a field :- vault kv get -field=<key> <path>  
+Delete value of a field:- vault kv delete <path>  
+
+Enable a secrets engine:- vault secrets enable -path=<path> <type>
+Disable the secret engine at the specified path:- vault secrets disble <path> 
+Lists the enables secret engines :- vault secrets list   
+
+
+To enable aws secrets engine:-  vault secrets enable -path=aws aws
+Configure aws secrets engine for root user(first step):- vault write aws/config/root access_key <access key> secret_key <secret key> region=<region> 
+To create a role and attach a policy:- vault write aws/role/<role name> credential_type=<credential type> policy_document=-<<EOF <policy> EOF 
+Generate the new credentials for the role:- vault read aws/role/<role name>   
+Revoke the secret:- vault lease revoke <lease id> 
+
+
+To create vault token:- vault token create
+To login with token:- vault login <token>   
+To revoke token:- vault token revoke <token> 
+
